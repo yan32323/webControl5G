@@ -1,0 +1,138 @@
+html, body {
+	height: 100%;
+	margin: 0;
+  }
+  
+  .wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+  }
+  header h1 {
+	margin: 0;
+  }
+  main {
+	flex: 1;
+	justify-content: center;
+	align-items: center; 
+	padding: 20px;
+  }
+  
+  footer {
+	background-color: black;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	width: 100%;
+  }
+
+
+.form-control {
+	position: relative;
+}
+
+.form-control select {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 100%;
+	font-size: 17px;
+	padding: 9px 22px 9px 22px;
+	background-color: #000000;
+	border: 0px solid #000000;
+	border-radius: 0px;
+	color: #FFFFFF;
+	cursor: pointer;
+	outline: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+.form-control select:focus {
+	background: #000000;
+	border: 1px solid #000000;
+	border-radius: 0px;
+}
+
+.form-control::after {
+	content: "";
+	position: absolute;
+	pointer-events: none;
+	top: 50%;
+	right: 15px;
+	transform: translate(0, -50%);
+	width: 22px;
+	height: 22px;
+	background-color: #FFFFFF;
+	clip-path: polygon(50% 80%, 0 20%, 100% 20%);
+}
+
+button {
+	font-family: arial;
+	color: #FFFFFF;
+	font-size: 14px;
+	text-shadow: 0px 0px 0px #000000;
+	box-shadow: 0px 0px 0px #000000;
+	padding: 10px 15px;
+	border-radius: 0px;
+	border: 2px solid #000000;
+	background: #000000;
+  }
+  button:hover {
+	color: #FFFFFF;
+	background: #737373;
+  }
+  
+  .erreurs {
+	color: #FF0000;
+	font-size: 25px;
+   text-shadow: 1px 1px 1px #000000;
+   height: 4cm;
+   text-align: center;
+   height: 2cm;
+    margin: 1cm;
+    text-align: center;
+    text-justify: center;
+   }
+   .retour {
+    height: 5cm;
+    margin: 1cm;
+    text-align: center;
+    text-justify: center;
+  }
+.resultats {
+	color: #000000;
+}
+
+.title {
+	color:white;
+}
+header {
+	background-color: #000000;
+}
+.layout {
+	width: 100%;
+  
+	display: flex;
+	gap: 16px;
+  
+	align-items: center;
+  }
+  
+  .grow1 { flex-grow: 1; }
+  .grow5 { flex-grow: 5; }
