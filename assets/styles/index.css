@@ -1,21 +1,35 @@
 html, body {
 	height: 100%;
 	margin: 0;
+	background-color:beige;
   }
-  
+
   .wrapper {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
   }
+
+  .groupe-btn {
+	display: flex;
+	justify-content: space-around;
+
+  }
+
   header h1 {
+	justify-content: center;
+	align-items: center; 
+	text-align: center;
+	text-justify:newspaper;
 	margin: 0;
   }
-  main {
+
+  .content-area {
 	flex: 1;
 	justify-content: center;
 	align-items: center; 
 	padding: 20px;
+	height : 20cm;
   }
   
   footer {
@@ -56,13 +70,6 @@ main {
   padding: 20px;
 }
 
-footer {
-  background-color: black;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-}
 .form-control select:focus {
 	background: #000000;
 	border: 1px solid #000000;
@@ -93,6 +100,7 @@ button {
 	border: 2px solid #000000;
 	background: #000000;
   }
+
   button:hover {
 	color: #FFFFFF;
 	background: #737373;
@@ -106,9 +114,9 @@ button {
    text-align: center;
    height: 2cm;
     margin: 1cm;
-    text-align: center;
     text-justify: center;
    }
+
    .retour {
     height: 5cm;
     margin: 1cm;
@@ -122,9 +130,32 @@ button {
 .title {
 	color:white;
 }
+
 header {
 	background-color: #000000;
+	height: 4cm;
+	padding: 1cm;
 }
+
+h2 {
+	font-size: 1cm ;
+}
+.content-area {
+	display : flex;
+	flex-direction: column;
+	height: 8cm;
+    justify-content: center;
+	align-items: center;
+}
+
+input {
+	margin: 10px ;
+}
+
+label {
+margin-left: 10px;
+}
+
 .layout {
 	width: 100%;
   
