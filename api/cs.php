@@ -9,9 +9,12 @@ $router->post('/cs.php/controls/', function() {
 
     header('Content-Type: application/json'); // Définir l'en-tête de réponse en JSON
 
-       $result = shell_exec("ls /"); // Exécuter la commande shell
+            // Extraire les éléments de l'objet JSON
+            $client_data_json = file_get_contents("php://input");
+            $client_data = json_decode($client_data_json, true);
 
-        echo json_encode($result); // Retourner le résultat au format JSON
+       $result = shell_exec("ls"); // Exécuter la commande shell
+        echo json_encode($result ." ** ".$client_data['1']." ** ". $client_data['2']); // Retourner le résultat au format JSON
         exit();
 
 });

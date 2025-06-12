@@ -7,7 +7,7 @@ user.set("password", "cont5GV2X@&D");
 user.set("email", "exemple@gmail.com");
 
 try {
-  await user.signUp();
+  user.signUp();
   console.log('User signed up:', user);
 } catch (error) {
   console.error('Error during sign up:', error);
