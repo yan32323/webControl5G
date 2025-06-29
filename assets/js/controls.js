@@ -38,7 +38,11 @@ if (currentUser != null) {
 
     const option1 = document.createElement('option');
     option1.value = "1";
-    option1.textContent = "DDoS";
+    option1.textContent = "DDoS TCP";
+
+    const option2 = document.createElement('option');
+    option1.value = "2";
+    option1.textContent = "DDoS UDP";
 
     const select2 = document.createElement('select');
     select2.class="form-control";
@@ -59,6 +63,7 @@ if (currentUser != null) {
 
     select1.appendChild(option0);
     select1.appendChild(option1);
+    select1.appendChild(option2);
 
     select2.appendChild(s2option0);
     select2.appendChild(s2option1);
@@ -120,6 +125,15 @@ if (currentUser != null) {
 
  window.addEventListener("beforeunload", () => { // déconnexion de l'utilisateur avant de quitter la page
   Parse.User.logOut();
+});
+
+document.getElementById('deconnexion').addEventListener('click', async function() {
+  try {
+    await Parse.User.logOut();
+    window.location.href = 'index.html';
+  } catch (error) {
+    console.error("Erreur lors de la déconnexion :", error);
+  }
 });
 
 });

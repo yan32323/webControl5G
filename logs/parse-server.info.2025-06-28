@@ -1,0 +1,14 @@
+{"level":"warn","message":"DeprecationWarning: The Parse Server option 'encodeParseObjectInCloudFunction' default will change to 'true' in a future version.","timestamp":"2025-06-28T17:28:57.648Z"}
+{"level":"warn","message":"DeprecationWarning: The Parse Server option 'enableInsecureAuthAdapters' default will change to 'false' in a future version.","timestamp":"2025-06-28T17:28:57.650Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T17:28:57.656Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T17:28:57.661Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T17:28:57.662Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T17:28:58.109Z"}
+{"level":"warn","message":"DeprecationWarning: PublicAPIRouter is deprecated and will be removed in a future version. pages.enableRouter","timestamp":"2025-06-28T17:28:58.113Z"}
+{"level":"warn","message":"DeprecationWarning: The Parse Server option 'encodeParseObjectInCloudFunction' default will change to 'true' in a future version.","timestamp":"2025-06-28T18:33:08.243Z"}
+{"level":"warn","message":"DeprecationWarning: The Parse Server option 'enableInsecureAuthAdapters' default will change to 'false' in a future version.","timestamp":"2025-06-28T18:33:08.245Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T18:33:08.252Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T18:33:08.255Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T18:33:08.256Z"}
+{"level":"warn","message":"DeprecationWarning: insecure adapter is deprecated and will be removed in a future version.","timestamp":"2025-06-28T18:33:08.656Z"}
+{"level":"warn","message":"DeprecationWarning: PublicAPIRouter is deprecated and will be removed in a future version. pages.enableRouter","timestamp":"2025-06-28T18:33:08.659Z"}

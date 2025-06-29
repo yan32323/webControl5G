@@ -66,6 +66,13 @@ html, body {
   min-height: 100vh;
 }
 
+.controls-header{
+	display: flex;
+	align-items: center;
+}
+disconnect {
+	height:1cm;
+}
 main {
   flex: 1;
   padding: 20px;
