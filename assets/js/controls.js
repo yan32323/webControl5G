@@ -23,9 +23,21 @@ if (currentUser != null) {
     button.textContent = "Lancer l'attaque";
     button.className = "grow1";
 
-
     const form = document.createElement('form');
-    form.className = 'layout'
+    form.className = 'layout';
+
+
+    const textCheckbox = document.createElement('div');
+    textCheckbox.innerText = "Inclure du trafic regulier";
+    textCheckbox.classList = "checkbox-text";
+
+    const checkbox1 = document.createElement('input');
+    checkbox1.type = "checkbox";
+    checkbox1.checked = true;
+    checkbox1.className = "form-control-checkbox";
+    checkbox1.id = "checkbox1";
+   
+
 
     const select1 = document.createElement('select');
     select1.class="form-control";
@@ -36,12 +48,17 @@ if (currentUser != null) {
     option0.value = "0";
     option0.textContent = "Sélectionner un type d'attaque";
 
+    
     const option1 = document.createElement('option');
     option1.value = "1";
+    option1.textContent = "Aucune attaque";
+
+        const option2 = document.createElement('option');
+    option1.value = "2";
     option1.textContent = "DDoS TCP";
 
-    const option2 = document.createElement('option');
-    option1.value = "2";
+    const option3 = document.createElement('option');
+    option1.value = "3";
     option1.textContent = "DDoS UDP";
 
     const select2 = document.createElement('select');
@@ -64,6 +81,7 @@ if (currentUser != null) {
     select1.appendChild(option0);
     select1.appendChild(option1);
     select1.appendChild(option2);
+    select1.appendChild(option3);
 
     select2.appendChild(s2option0);
     select2.appendChild(s2option1);
@@ -72,6 +90,8 @@ if (currentUser != null) {
     divSelect1.appendChild(select1);
     divSelect2.appendChild(select2);
 
+    form.appendChild(checkbox1);
+    form.appendChild(textCheckbox);
     form.appendChild(divSelect1);
     form.appendChild(divSelect2);
     form.appendChild(button);
@@ -84,6 +104,11 @@ if (currentUser != null) {
       
         event.preventDefault();
 
+        const checkbox1 = document.getElementById('checkbox1'); // Récupération de l'état de la case à cocher
+        let norm = 0; // Initialisation de la variable norm
+        if (checkbox1.checked) {
+          norm = 1; // Si la case est cochée, norm prend la valeur 1
+        }
         const selectedValue1 = select1.value; // Récupération des valeurs sélectionnées dans les menus déroulants
         const selectedValue2 = select2.value;
 
@@ -99,9 +124,10 @@ if (currentUser != null) {
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({ "1" : selectedValue1, "2" : selectedValue2 }), 
+                  body: JSON.stringify({"0" : norm , "1" : selectedValue1, "2" : selectedValue2 }), 
                 }
               );
+
               const reponse = await reponseJSON.json();
               const resultDiv = document.getElementsByClassName('retour')[0];
               resultDiv.textContent = "Retour serveur : " + reponse;

@@ -138,6 +138,11 @@ button {
 .title {
 	color:white;
 }
+.checkbox-text {
+	height: fit-content;
+	text-align: center;
+	text-justify: center;
+}
 
 header {
 	background-color: #000000;
