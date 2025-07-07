@@ -18,10 +18,15 @@ $OUTPUTPATH = '/home/yan/Documents/ETS/E2025/stage recheche 5G/Test/output/';
             $client_data = json_decode($client_data_json, true);
 
             // Vérifier si les données sont valides
+
         if ($client_data === null) {
+
         http_response_code(400); // Bad Request
+
         echo json_encode(['error' => 'Invalid JSON data']);
+
         exit();
+
         }
 
         // Vérifier si les données nécessaires sont présentes
@@ -36,6 +41,8 @@ $OUTPUTPATH = '/home/yan/Documents/ETS/E2025/stage recheche 5G/Test/output/';
         
         $PIDTR = null; // Initialiser le PID à null
         
+        $data = array(); // Initialiser un tableau pour stocker les données
+
         if ($client_data['0'] == 1) { // si le trafic regulier est demandé
             $PIDTR = shell_exec('normal_trafic > while true; do sudo ip netns exec ue1 curl http://10.53.1.2/ > /dev/null; sleep 1.0 ; done');
         }
@@ -53,7 +60,27 @@ $OUTPUTPATH = '/home/yan/Documents/ETS/E2025/stage recheche 5G/Test/output/';
         // lancer la detection d'attaque si demandé
 
         if ($client_data['2'] == "1") {
+
             shell_exec('sudo '.$OUTPUTPATH.'monitoring.sh &');
+
+
+            $done = false; // Initialiser la variable $done à false
+
+            while (!$done) { // Boucle jusqu'à ce que $done soit true
+
+                sleep(5); // Attendre 5 secondes avant de vérifier à nouveau
+
+                // Attendre que les 4 fichiers de sortie soient créés
+                if (count(array_values(array_diff(scandir($OUTPUTPATH), $curent_files)))>3 ){
+                    $done = true; // Mettre à jour la variable $done à true
+                }
+            }
+
+
+            $filesResult = array_values(array_diff(scandir($OUTPUTPATH), $curent_files));
+
+            $data = lectureDeFichiersCSV($filesResult, $OUTPUTPATH); // Lire les fichiers CSV et stocker les données dans $data
+            
         }
 
 
@@ -62,17 +89,62 @@ $OUTPUTPATH = '/home/yan/Documents/ETS/E2025/stage recheche 5G/Test/output/';
         if ($client_data['1'] != "1") {
             shell_exec("kill $PIDTA");
         }
-
-        $result = shell_exec("ls /"); // Exécuter la commande shell (exemple)
-    
-        echo json_encode($result ." ** ".$client_data['1']." ** ". $client_data['2']); // Retourner le résultat au format JSON
-        
+            
         if ($client_data['0'] == 1) { // arreter le trafic regulier si present
                 shell_exec("kill $PIDTR");
+        }
+
+        if (count($data) > 0) {
+            echo json_encode(['error'=>'none', $data]); // Retourner les données au format JSON
+        } else {
+            echo json_encode(['error' => 'No data requested, success']);
         }
         exit();
 
 });
+
+/**
+ * Lecture des fichiers CSV et stockage des données dans un tableau
+ * 
+ * @param array $arrayFichiers Tableau contenant les noms des fichiers CSV
+ * @param string $OUTPUTPATH Chemin du répertoire contenant les fichiers CSV
+ * @return array $dataTab : tableau contenant les secondes lignes lues des fichiers CSV
+ */
+function lectureDeFichiersCSV($arrayFichiers, $OUTPUTPATH) {
+
+                $dataTab = array(); // Initialiser un tableau pour stocker les données
+
+                for ($i = 0; $i < count($arrayFichiers); $i++) { // Parcourir les fichiers de résultats
+
+                    $csvFile = fopen($OUTPUTPATH . $arrayFichiers[$i], 'r');
+
+                if ($csvFile == false) {
+
+                    echo json_encode(['error' => 'Erreur lors de l\'ouverture d\'un fichier.']);
+
+                    exit();
+
+                }
+
+                $lineNumber = 0; // Initialiser le compteur de lignes
+
+                while (($row = fgetcsv($csvFile)) !== false) {
+
+                    if ($lineNumber == 1) {  // stocker la ligne 2
+
+                        $dataTab[$i] = $row;
+
+                    }
+
+                    $lineNumber++; // Incrémenter le compteur de lignes
+
+                }
+
+                fclose($csvFile); // Fermer le fichier CSV
+
+                return $dataTab; // Retourner le tableau contenant les secondes lignes lues des fichiers CSV
+                }
+}
 
 // Acheminer la requête
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
