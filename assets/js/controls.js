@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 const currentUser = Parse.User.current();
 if (currentUser != null) {
 
-  if (currentUser.getUsername()=="admin"){
-  // Création des éléments HTML pour l'interface de contrôle une fois que l'utilisateur est identifié
+ if (currentUser.getUsername()=="admin"){
+  //Création des éléments HTML pour l'interface de contrôle une fois que l'utilisateur est identifié
 
     const divErreurs = document.createElement('div');
     divErreurs.className = 'erreurs';
@@ -53,13 +53,13 @@ if (currentUser != null) {
     option1.value = "1";
     option1.textContent = "Aucune attaque";
 
-        const option2 = document.createElement('option');
-    option1.value = "2";
-    option1.textContent = "DDoS TCP";
+    const option2 = document.createElement('option');
+    option2.value = "2";
+    option2.textContent = "DDoS TCP";
 
     const option3 = document.createElement('option');
-    option1.value = "3";
-    option1.textContent = "DDoS UDP";
+    option3.value = "3";
+    option3.textContent = "DDoS UDP";
 
     const select2 = document.createElement('select');
     select2.class="form-control";
@@ -129,10 +129,69 @@ if (currentUser != null) {
               );
 
               const reponse = await reponseJSON.json();
-              const resultDiv = document.getElementsByClassName('retour')[0];
-              resultDiv.textContent = "Retour serveur : " + reponse;
+
+              if (!('error' in reponse)) {
+
+                const resultDiv = document.getElementsByClassName('retour')[0];
+
+                const table = document.createElement("table");
+
+                const titles =["Model", "Time", "Packets", "Samples", "DDOS %", "Accuracy","F1 Score", "TPR", "FPR", "TNR", "FNR","Source", "Attackers"];
+
+                titles.forEach(title => {
+                  const th = document.createElement("th");
+                  th.textContent = title;
+                  table.appendChild(th);
+                });
+
+                let index = 1;
+
+                while (index in reponse) { // Vérification de l'existence de la clé dans l'objet
+
+                      const tr = document.createElement("tr");s
+                      reponse[index].forEach(cell => {
+                        const td = document.createElement("td");
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                      });
+                    table.appendChild(tr);
+
+                    index++;
+                }
+                resultDiv.appendChild(table); // Ajout du tableau à la section des résultats
+
+              } else {
+                
               const erreursDiv = document.getElementsByClassName('erreurs')[0];
+
               erreursDiv.textContent = " ";
+
+                switch (reponse.error) {
+                  case '0': {
+                    const resultDiv = document.getElementsByClassName('retour')[0];
+                    resultDiv.textContent = "Aucune donnée demandée, succès";
+                  } break;
+                  case '1': {
+                    erreursDiv.textContent = "Erreur lors de la requête : Aucune donnée dans les fichiers CSV";
+                  } break;
+                  case '2': {
+                    alert("Erreur lors de la requête : Données manquantes");
+                      try {
+                        await Parse.User.logOut();
+                        window.location.href = 'index.html';
+                      } catch (error) {
+                        console.error("Erreur lors de la déconnexion :", error);
+                      }
+                    } break;
+                  case '3': {} break; // TODO : Gérer les prochaines erreurs
+                  default: {
+                    erreursDiv.textContent = "Erreur inconnue lors de la requête : " + reponse.error;
+                  } break;
+
+                }
+
+              }
+
             } catch (error) {
               const erreursDiv = document.getElementsByClassName('erreurs')[0];
               erreursDiv.textContent = "Erreur lors de la requête : " + error.message;

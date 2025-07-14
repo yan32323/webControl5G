@@ -180,3 +180,35 @@ margin-left: 10px;
   
   .grow1 { flex-grow: 1; }
   .grow5 { flex-grow: 5; }
+
+ table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      color: #000;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #000;
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e0e0e0;
+    }
